@@ -1,3 +1,12 @@
+###################################################################################
+# Script Name	: gen_ssh_keyPair.py
+# Description	: 
+# Args          :
+# Author       	: Jyotismita Tripathy
+# Email         : jyotismita.t@gmail.com
+# v1            : on 20-May-2020, Initial Draft
+###################################################################################
+
 import os
 import sys
 import subprocess
