@@ -1,0 +1,89 @@
+
+Check the SELinux configuration.
+[root@awx ~]# sestatus
+
+01/ Selinux and Firewall Settings
+    01 - in the first place, let’s install the policycoreutils-python and allow Nginx to connect to network as below:
+      sudo yum -y install policycoreutils-python
+      setsebool -P httpd_can_network_connect 1
+    
+  02- If the firewalld is active, than when need to enable the http traffic, execute the following command:
+      # firewall-cmd --permanent --add-service=http
+      success
+      # firewall-cmd --reload
+      success
+    
+2/ Memcached, Ansible and necessary packages Installation
+  01- Now, run the following command to install the EPEL Release repository, memchached and Ansible:
+    # yum install -y memcached ansible epel-release
+    02- After finishing the installation, we have to enable and start Memcached service by running:
+
+    # systemctl enable memcached
+    # systemctl start  memcached
+   
+ 3/ PostgreSQL Server Installation
+       Step 1: Add the PostgreSQL 10 Repository
+            # yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm -y
+      Step 2: Install PostgreSQL 10
+            # yum install postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs -y
+      Step 3: Start PostgreSQL
+          – Initialize PostgreSQL:
+                # /usr/pgsql-10/bin/postgresql-10-setup initdb
+                Initializing database ... OK 
+          – Start/Enable PostgreSQL:
+                # systemctl enable postgresql-10.service
+                # systemctl start postgresql-10.service
+      Step 4: Accessing Database
+          – Switch into the postgres user:
+                # su – postgres
+          – Connect to the PostgreSQL terminal:
+                 # psql
+                 
+    02- Once you finish installing and initiating PostgrSQL Server, we have to create the awx database calledawx and grant access to the user awx as below:
+
+        # sudo -u postgres createuser -S awx
+        su postgres -c createuser -S awx
+        # sudo -u postgres createdb -O awx awx
+     NOTE: I have created db and user under /u01/ folder, since i was geting permission denied error under home dir.
+     
+   4/ RabbitMQ Installation
+   01- At first, create the RabbitMQ and Erlang Repositories as below:
+
+          # echo "[bintraybintray-rabbitmq-erlang-rpm] 
+          name=bintray-rabbitmq-erlang-rpm 
+          baseurl=https://dl.bintray.com/rabbitmq-erlang/rpm/erlang/21/el/7/
+          gpgcheck=0 
+          repo_gpgcheck=0 
+          enabled=1" > /etc/yum.repos.d/rabbitmq-erlang.repo
+          
+          
+          # echo "[bintraybintray-rabbitmq-rpm] 
+          name=bintray-rabbitmq-rpm 
+          baseurl=https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/7/
+          gpgcheck=0 
+          repo_gpgcheck=0 
+          enabled=1" > /etc/yum.repos.d/rabbitmq.repo
+          
+     02- In the second place, install RabbitMQ, after that we can proceed with enabling/starting the RabbitMQ service by executing the following commands:
+            # yum install -y rabbitmq-server
+            # systemctl enable rabbitmq-server
+            # systemctl start rabbitmq-server
+  
+  05/ Nginx Installation and Configuration as Web Server Proxy for AWX
+        01- Install nginx by running the following command
+        # yum install -y nginx
+        
+        02- Configure nginx as web proxy for awx:
+        # cp -p /etc/nginx/nginx.conf{,.org}
+        # wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/faudeltn/AnsibleTower-awx/master/ansible-awx-install/nginx.conf
+        
+        03- Enable and start nginx:
+        # systemctl start nginx
+        # systemctl enable nginx
+        
+   06/ AWX Installation and initialization
+        01- To install awx, run the following commands:
+        wget -O /etc/yum.repos.d/awx-rpm.repo https://copr.fedorainfracloud.org/coprs/mrmeee/ansible-awx/repo/epel-7/mrmeee-awx-epel-7.repo
+        # yum install -y ansible-awx
+        
+       
