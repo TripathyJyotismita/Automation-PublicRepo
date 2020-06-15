@@ -1,0 +1,8 @@
+Refer thie link for all the steps:
+  https://www.youtube.com/watch?v=GKvCTKoPIrQ
+
+Enable Copy and paste in VM box:
+  Install Dependencies:
+  yum install kernel-uek-devel-$(uname -r)
+  
+  Once done, go to Devices --> Insert Guest Addition CD Images --> (POP UP will appear on desktop) Run it --> Give your user password --> Eject the CD --> Restart/Reboot the machine
