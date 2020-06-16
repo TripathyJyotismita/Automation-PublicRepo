@@ -1,3 +1,6 @@
+After AWX is installed, you can log in with the default username admin and password password.
+
+
 Ref doc: https://oracle-base.com/articles/linux/awx-installation-on-ol7-using-the-docker-compose-method#:~:text=Install%20AWX,Ansible%2C%20PIP%20and%20Git%20packages.&text=Make%20sure%20the%20Python%20libraries,for%20Docker%20and%20Docker%2DCompose.&text=Clone%20the%20AWX%20repository%20and%20switch%20to%20the%20installer%20directory.&text=Amend%20the%20contents%20of%20the,file%20as%20you%20see%20fit.
 AWX Installation on Oracle Linux 7 (OL7) Using the Docker-Compose Method
 Assumptions
