@@ -1,4 +1,4 @@
-After AWX is installed, you can log in with the default username admin and password password.
+
 
 
 Ref doc: https://oracle-base.com/articles/linux/awx-installation-on-ol7-using-the-docker-compose-method#:~:text=Install%20AWX,Ansible%2C%20PIP%20and%20Git%20packages.&text=Make%20sure%20the%20Python%20libraries,for%20Docker%20and%20Docker%2DCompose.&text=Clone%20the%20AWX%20repository%20and%20switch%20to%20the%20installer%20directory.&text=Amend%20the%20contents%20of%20the,file%20as%20you%20see%20fit.
@@ -89,3 +89,10 @@ Install the required Ansible, PIP and Git packages.
             32a81b62b3c8        postgres:10          "docker-entrypoint.s…"   37 seconds ago      Up 18 seconds       5432/tcp               awx_postgres
             139fcf232dc6        redis                "docker-entrypoint.s…"   37 seconds ago      Up 28 seconds       6379/tcp               awx_redis
             [root@localhost installer]# 
+            
+     
+     Once the installation is complete, you should have a running AWX environment. The web interface is available from the following URLs by default.
+
+            http://localhost:80
+            http://localhost:443
+      After AWX is installed, you can log in with the default username admin and password password.
