@@ -6,6 +6,11 @@ Assumptions
       You have a location called "/u01", which is either on a separate disk, or under the "/" mount point. Preferable not the latter.
       All actions performed as the "root" user.
       
+
+https://yum.oracle.com/oracle-linux-python.html
+sudo yum install -y oracle-epel-release-el7 oracle-release-el7
+sudo yum install -y python3
+
 Install Docker
       The installation of Docker on Oracle Linux is described in full here. To keep things simple I've abbreviated it here. Some of these actions are destructive, so if in doubt read the related article.
 
@@ -64,3 +69,20 @@ Install the required Ansible, PIP and Git packages.
         Error: "Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!"} in python3
     
         Solution: sudp pip3 install selinux
+        or
+        yum install libselinux-python
+        
+        Error:
+        atal: [localhost]: FAILED! => {"changed": false, "msg": "Failed to import the required Python library (Docker SDK for Python: docker (Python >= 2.7) or docker-py (Python 2.6)) on RS2's Python /bin/python3. Please read module documentation and install in the appropriate location. If the required library is installed, but Ansible is using the wrong Python interpreter, please consult the documentation on ansible_python_interpreter, for example via `pip install docker` or `pip install docker-py` (Python 2.6). The error was: No module named 'requests'"}
+        
+        pip3 install docker
+        pip3 install docker-compose
+        
+     Once done you will have the following containers running:
+           [root@localhost installer]# docker ps
+            CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                  NAMES
+            328724ef6152        ansible/awx:12.0.0   "tini -- /usr/bin/la…"   34 seconds ago      Up 28 seconds       8052/tcp               awx_task
+            d470ac850fa6        ansible/awx:12.0.0   "tini -- /bin/sh -c …"   36 seconds ago      Up 28 seconds       0.0.0.0:80->8052/tcp   awx_web
+            32a81b62b3c8        postgres:10          "docker-entrypoint.s…"   37 seconds ago      Up 18 seconds       5432/tcp               awx_postgres
+            139fcf232dc6        redis                "docker-entrypoint.s…"   37 seconds ago      Up 28 seconds       6379/tcp               awx_redis
+            [root@localhost installer]# 
