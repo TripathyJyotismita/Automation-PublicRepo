@@ -96,3 +96,11 @@ Install the required Ansible, PIP and Git packages.
             http://localhost:80
             http://localhost:443
       After AWX is installed, you can log in with the default username admin and password password.
+      
+      the inventory file in /opt/awx/installer has this line:
+
+      #This will create or update a default admin (superuser) account in AWX, if not provided
+      #then these default values are used
+      admin_user=admin
+      admin_password=password
+      You can change the password and re-ran install.yml. It will apply the new password.
