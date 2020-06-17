@@ -116,3 +116,37 @@ Install the required Ansible, PIP and Git packages.
       admin_user=admin
       admin_password=password
       You can change the password and re-ran install.yml. It will apply the new password.
+
+UPDATE project_data_dir:
+
+[root@rs0-ansible-host installer]# cat inventory | grep 'project_data_dir'
+project_data_dir=/var/lib/awx/projects  #uncommented in inventory and then restarted docker images as below
+
+#AWX
+sudo docker pause awx_task
+sudo docker stop awx_task
+sudo docker restart awx_task
+
+#AWX-Web
+sudo docker pause awx_web
+sudo docker stop awx_web
+sudo docker restart awx_web
+
+#AWX-RabbitMQ
+sudo docker pause awx_rabbitmq
+sudo docker stop awx_rabbitmq
+sudo docker restart awx_rabbitmq
+
+#AWX-PostgreSQL
+sudo docker pause awx_postgres
+sudo docker stop awx_postgres
+sudo docker restart awx_postgres
+
+#AWX-Memcached
+sudo docker pause awx_memcached
+sudo docker stop awx_memcached
+sudo docker restart awx_memcached
+
+https://www.unixarena.com/2019/03/ansible-tower-awx-creating-scm-git-project-in-ansible.html/
+https://www.unixarena.com/2018/11/ansible-tower-awx-how-to-create-manual-scm-project.html/
+https://www.unixarena.com/2018/10/ansible-how-to-install-and-configure-awx.html/
