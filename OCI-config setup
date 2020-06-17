@@ -1,0 +1,21 @@
+OCI config setup:
+If you're using Oracle Linux 7, you can use yum to install the CLI
+	sudo yum install python36-oci-cli
+Thenk run:
+	oci setup config
+
+Verify:
+	oci iam region list
+
+else:	
+	mkdir .oci
+	openssl genrsa -out ~/.oci/oci_api_key.pem 2048
+	chmod go-rwx ~/.oci/oci_api_key.pem
+	openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
+
+	[jytripat@rs0-ansible-host .oci]$ openssl rsa -pubout -outform DER -in ~/.oci/oci_api_key.pem | openssl md5 -c
+	writing RSA key
+	(stdin)= 1c:a1:aa:c4:ee:06:d8:a5:ab:a8:10:e5:09:d2:bf:85
+	
+	Run: oci setup config
+	Ref doc: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
