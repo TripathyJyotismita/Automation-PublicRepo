@@ -8,22 +8,34 @@ Assumptions
       You have at least one spare disk (real or virtual) to act as the "/var/lib/docker" mount point using BTRFS.
       You have a location called "/u01", which is either on a separate disk, or under the "/" mount point. Preferable not the latter.
       All actions performed as the "root" user.
-      
-
-https://yum.oracle.com/oracle-linux-python.html
-sudo yum install -y oracle-epel-release-el7 oracle-release-el7
-sudo yum install -y python3
+    
+INSTALL PYTHON3:
+      Ref: https://yum.oracle.com/oracle-linux-python.html
+	sudo yum install -y oracle-epel-release-el7 oracle-release-el7
+	sudo yum install -y python3
+	sudo yum update -y
 
 Install Docker
       The installation of Docker on Oracle Linux is described in full here. To keep things simple I've abbreviated it here. Some of these actions are destructive, so if in doubt read the related article.
+      INSTALL DOCKER:
+		yum install -y yum-utils zip unzip
+		yum-config-manager --enable ol7_optional_latest
+		yum-config-manager --enable ol7_addons
 
-Make sure the relevant repositories are enabled.
-      yum install yum-utils zip unzip -y
-      yum-config-manager --enable ol7_optional_latest
-      yum-config-manager --enable ol7_addons
-      yum-config-manager --enable ol7_preview
-      yum-config-manager --enable ol7_developer
-      yum-config-manager --enable ol7_developer_EPEL
+		yum install -y oraclelinux-developer-release-el7
+		yum install -y docker-engine btrfs-progs btrfs-progs-devel
+      
+INSTALL YUM REPO:
+      Make sure the relevant repositories are enabled.
+            yum install yum-utils zip unzip -y
+            yum-config-manager --enable ol7_optional_latest
+            yum-config-manager --enable ol7_addons
+            yum-config-manager --enable ol7_preview
+            yum-config-manager --enable ol7_developer
+            yum-config-manager --enable ol7_developer_EPEL
+      
+       NOTE: (any of the above repo is missing)
+              sudo wget http://yum.oracle.com/public-yum-ol7.repo
 
 # Enable the Docker service.
       systemctl enable docker.service
@@ -71,7 +83,7 @@ Install the required Ansible, PIP and Git packages.
     Troubleshooting:
         Error: "Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!"} in python3
     
-        Solution: sudp pip3 install selinux
+        Solution: sudo pip3 install selinux
         or
         yum install libselinux-python
         
