@@ -1,5 +1,7 @@
-OCI config setup:
+OCI config setup: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/climanualinst.htm
 If you're using Oracle Linux 7, you can use yum to install the CLI
+	sudo yum install gcc libffi-devel python-devel openssl-devel
+	sudo easy_install pip
 	sudo yum install python36-oci-cli
 Thenk run:
 	oci setup config
