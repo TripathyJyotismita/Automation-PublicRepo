@@ -1,0 +1,8 @@
+Step1:
+1. Create a dir to hold django project and venv
+	Dir path: /pz2ea0c0/fmw
+	Dir name: order-reporting
+	
+2.Create a django project:
+	Command:  django-admin startproject <project_dir_name>
+  
