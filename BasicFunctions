@@ -9,3 +9,10 @@ print(fib_series(2))
 Output
 Fibonacci series upto 2:
 [0, 1]
+
+
+Factorial:
+from functools import reduce
+#res = [n*Factorial(n-1) for n in range(0,n-1)]
+res = reduce(lambda x,y:x*y,range(1,n+1))
+print('res',res)
